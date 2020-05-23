@@ -1,5 +1,8 @@
 # History
 
+## 0.12.4.1 / 2020-05-23
+  * Added custom escape sequence (fd --> esc)
+
 ## 0.12.4 / 2020-05-20
 
   * Switch from travis to GitHub actions.
