@@ -59,7 +59,7 @@ class VimCell {
         // }
         let activeCell = this._tracker.activeCell;
         if (activeCell !== null) {
-            const {commands} = this._app;
+            const { commands } = this._app;
             let editor = activeCell.editor as CodeMirrorEditor;
             editor.setOption('keyMap', 'vim');
             let extraKeys = editor.getOption('extraKeys') || {};
@@ -98,7 +98,7 @@ class VimCell {
                     case 'moveByScroll':
                     case 'moveToColumn':
                     case 'moveToEol':
-                        // JUPYTER PATCH: add our custom method to the motion cases
+                    // JUPYTER PATCH: add our custom method to the motion cases
                     case 'moveByLinesOrCell':
                         endCh = vim.lastHPos;
                         break;
@@ -172,18 +172,21 @@ class VimCell {
                 { context: 'normal' }
             );
 
+            // custom escape sequence
+            lvim.map("fd", "<Esc>", "insert");
+
             lvim.defineAction('moveCellDown', (cm: any, actionArgs: any) => {
                 commands.execute('notebook:move-cell-down');
             });
             lvim.defineAction('moveCellUp', (cm: any, actionArgs: any) => {
                 commands.execute('notebook:move-cell-up');
             });
-            lvim.mapCommand('<C-e>', 'action', 'moveCellDown', {}, {extra: 'normal'});
-            lvim.mapCommand('<C-y>', 'action', 'moveCellUp', {}, {extra: 'normal'});
+            lvim.mapCommand('<C-e>', 'action', 'moveCellDown', {}, { extra: 'normal' });
+            lvim.mapCommand('<C-y>', 'action', 'moveCellUp', {}, { extra: 'normal' });
             lvim.defineAction('splitCell', (cm: any, actionArgs: any) => {
                 commands.execute('notebook:split-cell-at-cursor');
             });
-            lvim.mapCommand('-', 'action', 'splitCell', {}, {extra: 'normal'});
+            lvim.mapCommand('-', 'action', 'splitCell', {}, { extra: 'normal' });
         }
     }
 
