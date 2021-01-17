@@ -139,7 +139,7 @@ class VimCell {
         }
       );
 
-      lvim.mapCommand(
+      lvim.map(
         'fd', '<Esc>', 'insert'
       );
       lvim.mapCommand(
